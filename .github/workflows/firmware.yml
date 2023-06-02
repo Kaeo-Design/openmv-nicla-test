@@ -28,8 +28,8 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        target: [NICLAV]
-     
+        target: [OPENMV2, OPENMV3, OPENMV4, OPENMV4P, PORTENTA, OPENMVPT, NICLAV, NANO33, ARDUINO_NANO_RP2040_CONNECT]
+    
   
       fail-fast: false
     steps:
