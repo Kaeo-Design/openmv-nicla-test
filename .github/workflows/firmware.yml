@@ -28,13 +28,9 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        target: [NICLAV]
-    
-  
+        target: [OPENMV2, OPENMV3, OPENMV4, OPENMV4P, OPENMV4_PRO, PORTENTA, OPENMVPT, NICLAV, NANO33, ARDUINO_NANO_RP2040_CONNECT]
       fail-fast: false
     steps:
-    
-    
     - name: '⏳ Checkout repository'
       uses: actions/checkout@v3
       with:
@@ -129,7 +125,13 @@ jobs:
     - name: '📦 Package firmware'
       run: source tools/ci.sh && ci_package_firmware_development
 
-
+    - name: '🧹 Delete old release'
+      uses: dev-drprasad/delete-tag-and-release@v0.2.0
+      with:
+        delete_release: true
+        tag_name: development
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: "✏️ Generate release changelog"
       id: changelog
@@ -158,5 +160,3 @@ jobs:
       with:
         name: firmware
         failOnError: false
-        
-        
